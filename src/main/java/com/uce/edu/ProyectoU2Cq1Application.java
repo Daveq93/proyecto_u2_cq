@@ -6,7 +6,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.edu.service.IEstudianteService;
 import com.uce.edu.service.IPersonaJdbcService;
+import com.uce.edu.to.Estudiante;
 import com.uce.edu.to.Persona;
 
 @SpringBootApplication
@@ -16,6 +18,10 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 
 	@Autowired
 	private IPersonaJdbcService personaService;
+	
+	@Autowired
+	private IEstudianteService estudianteService;
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2Cq1Application.class, args);
@@ -52,7 +58,41 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 
 		
 		//buscar
-		LOG.info(this.personaService.buscarPorCedula("1010101010"));
+		//LOG.info(this.personaService.buscarPorCedula("1010101010"));
+		
+		
+		System.out.println("--------- TAREA 13 ----------");
+		
+		Estudiante e1 = new Estudiante();
+		e1.setId(1);
+		e1.setNombre("Paula");
+		e1.setApellido("Robles");
+		e1.setCedula("1313131313");
+		e1.setEdad(20);
+		
+		//insertar
+		this.estudianteService.insertarEstudiante(e1);
+		
+		
+		//Actualizar
+		
+		Estudiante e1Act = new Estudiante();
+		e1Act.setId(1);
+		e1Act.setNombre("Paula");
+		e1Act.setApellido("Robles Vaca");
+		e1Act.setCedula("1313131313");
+		e1Act.setEdad(20);
+		
+		this.estudianteService.actualizarEstudiante(e1Act);
+		
+		//Buscar por cedula
+		
+		LOG.info(this.estudianteService.buscarPorCedula("1313131313"));
+		
+		
+		//Eliminar por id
+		
+		this.estudianteService.eliminarPorId(2);
 
 	}
 
