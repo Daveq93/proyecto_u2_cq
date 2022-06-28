@@ -9,31 +9,33 @@ import com.uce.edu.to.Persona;
 @Service
 public class PersonaJdbcServiceImpl implements IPersonaJdbcService {
 
-//	@Autowired
-//	private IPersonaJdbcRepository personaRepo;
-//	
-//	@Override
-//	public void insertarPersona(Persona persona) {
-//		// TODO Auto-generated method stub
-//		this.personaRepo.insertar(persona);
-//	}
-//
-//	@Override
-//	public void actualizarPersona(Persona persona) {
-//		// TODO Auto-generated method stub
-//		this.personaRepo.actualizar(persona);
-//	}
-//
-//	@Override
-//	public Persona buscarPorNombre(String nombre) {
-//		// TODO Auto-generated method stub
-//		return this.personaRepo.buscar(nombre);
-//	}
-//
-//	@Override
-//	public void eliminarPorNombre(String nombre) {
-//		// TODO Auto-generated method stub
-//		this.personaRepo.eliminar(nombre);
-//	}
+	@Autowired
+	private IPersonaJdbcRepository personaRepo;
+	
+	@Override
+	public void insertarPersona(Persona persona) {
+		// TODO Auto-generated method stub
+		this.personaRepo.insertar(persona);
+	}
+
+	@Override
+	public void actualizarPersona(Persona persona) {
+		// TODO Auto-generated method stub
+		this.personaRepo.actualizar(persona);
+	}
+
+	@Override
+	public Persona buscarPorCedula(String cedula) {
+		// TODO Auto-generated method stub
+		return this.personaRepo.buscar(cedula);
+	}
+
+	@Override
+	public void eliminarPorCedula(String cedula) {
+		// TODO Auto-generated method stub
+		this.personaRepo.eliminar(cedula);
+	}
+
+
 
 }

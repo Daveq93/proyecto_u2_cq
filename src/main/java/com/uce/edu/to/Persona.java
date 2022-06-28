@@ -24,10 +24,38 @@ public class Persona {
 	//@Column(name="pers_apellido")
 	private String apellido;
 
+	private String cedula;
 	
+	
+	public Persona(Integer id, String nombre, String apellido, String cedula) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.cedula = cedula;
+	}
+
+	//Constructor por defecto
+	public Persona() {
+		//super();
+	}
+	
+	@Override
+	public String toString() {
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + "]";
+	}
+
 	//set and get
 	public Integer getId() {
 		return id;
+	}
+
+	public String getCedula() {
+		return cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 
 	public void setId(Integer id) {
