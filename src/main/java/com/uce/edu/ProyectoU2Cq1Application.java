@@ -6,9 +6,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.edu.repository.modelo.Estudiante;
+import com.uce.edu.service.IEstudianteJpaService;
 import com.uce.edu.service.IEstudianteService;
 import com.uce.edu.service.IPersonaJdbcService;
-import com.uce.edu.to.Estudiante;
+import com.uce.edu.to.EstudianteTo;
 import com.uce.edu.to.Persona;
 
 @SpringBootApplication
@@ -21,6 +23,9 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 	
 	@Autowired
 	private IEstudianteService estudianteService;
+	
+	@Autowired
+	private IEstudianteJpaService estudianteJpaService;
 	
 
 	public static void main(String[] args) {
@@ -63,7 +68,7 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		
 		System.out.println("--------- TAREA 13 ----------");
 		
-		Estudiante e1 = new Estudiante();
+		EstudianteTo e1 = new EstudianteTo();
 		e1.setId(1);
 		e1.setNombre("Paula");
 		e1.setApellido("Robles");
@@ -71,29 +76,65 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		e1.setEdad(20);
 		
 		//insertar
-		this.estudianteService.insertarEstudiante(e1);
+		//this.estudianteService.insertarEstudiante(e1);
 		
 		
 		//Actualizar
 		
-		Estudiante e1Act = new Estudiante();
+		EstudianteTo e1Act = new EstudianteTo();
 		e1Act.setId(1);
 		e1Act.setNombre("Paula");
 		e1Act.setApellido("Robles Vaca");
 		e1Act.setCedula("1313131313");
 		e1Act.setEdad(20);
 		
-		this.estudianteService.actualizarEstudiante(e1Act);
+		//this.estudianteService.actualizarEstudiante(e1Act);
 		
 		//Buscar por cedula
 		
-		LOG.info(this.estudianteService.buscarPorCedula("1313131313"));
+		//LOG.info(this.estudianteService.buscarPorCedula("1313131313"));
 		
 		
 		//Eliminar por id
 		
-		this.estudianteService.eliminarPorId(2);
+		//this.estudianteService.eliminarPorId(2);
 
+		System.out.println("--------  Tarea 14 --------------");
+		
+		Estudiante e2 = new Estudiante();
+		e2.setId(2);
+		e2.setNombre("Maria");
+		e2.setApellido("Vaca");
+		e2.setCedula("1515151515");
+		e2.setEdad(25);
+		
+		Estudiante e3 = new Estudiante();
+		e3.setId(3);
+		e3.setNombre("Paul");
+		e3.setApellido("Medina");
+		e3.setCedula("1616161616");
+		e3.setEdad(22);
+		
+		//Insertar
+		this.estudianteJpaService.insertarEstudiante(e2);
+		this.estudianteJpaService.insertarEstudiante(e3);
+		
+		Estudiante e3Act = new Estudiante();
+		e3Act.setId(3);
+		e3Act.setNombre("PaulX");
+		e3Act.setApellido("MedinaN");
+		e3Act.setCedula("1616161616");
+		e3Act.setEdad(22);
+		
+		//Actualizar
+		this.estudianteJpaService.actualizarEstudiante(e3Act);
+		
+		//Buscar
+		LOG.info(this.estudianteJpaService.buscarPorCedula("1515151515"));
+		
+		//Eliminar
+		this.estudianteJpaService.eliminarPorCedula("1616161616");
+		
 	}
 
 }

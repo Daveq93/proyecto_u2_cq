@@ -3,37 +3,37 @@ package com.uce.edu.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.uce.edu.repository.IEstudianteRepo;
-import com.uce.edu.to.EstudianteTo;
+import com.uce.edu.repository.IEstudianteJpaRepo;
+import com.uce.edu.repository.modelo.Estudiante;
 
 @Service
-public class EstudianteServiceImpl implements IEstudianteService {
+public class EstudianteJpaServiceImpl implements IEstudianteJpaService {
 
 	@Autowired
-	private IEstudianteRepo estudianteRepo;
+	private IEstudianteJpaRepo estudianteRepo;
 	
 	@Override
-	public void insertarEstudiante(EstudianteTo estudiante) {
+	public void insertarEstudiante(Estudiante estudiante) {
 		// TODO Auto-generated method stub
 		this.estudianteRepo.insertar(estudiante);
 	}
 
 	@Override
-	public void actualizarEstudiante(EstudianteTo estudiante) {
+	public void actualizarEstudiante(Estudiante estudiante) {
 		// TODO Auto-generated method stub
 		this.estudianteRepo.actualizar(estudiante);
 	}
 
 	@Override
-	public EstudianteTo buscarPorCedula(String cedula) {
+	public Estudiante buscarPorCedula(String cedula) {
 		// TODO Auto-generated method stub
 		return this.estudianteRepo.buscar(cedula);
 	}
 
 	@Override
-	public void eliminarPorId(Integer id) {
+	public void eliminarPorCedula(String cedula) {
 		// TODO Auto-generated method stub
-		this.estudianteRepo.eliminar(id);
+		this.estudianteRepo.eliminar(cedula);
 	}
 
 }

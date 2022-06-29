@@ -1,25 +1,27 @@
-package com.uce.edu.to;
+package com.uce.edu.repository.modelo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="estudiante")
 public class Estudiante {
-
+	
+	@Id
+	@Column(name="id")
 	private Integer id;
+	@Column(name="nombre")
 	private String nombre;
+	@Column(name="apellido")
 	private String apellido;
+	@Column(name="cedula")
 	private String cedula;
+	@Column(name="edad")
+	private Integer edad;
 
-	public Estudiante() {
-		super();
-	}
-
-	public Estudiante(Integer id, String nombre, String apellido, String cedula, Integer edad) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.cedula = cedula;
-		this.edad = edad;
-	}
+	
 
 	@Override
 	public String toString() {
@@ -67,6 +69,4 @@ public class Estudiante {
 	public void setEdad(Integer edad) {
 		this.edad = edad;
 	}
-
-	private Integer edad;
 }

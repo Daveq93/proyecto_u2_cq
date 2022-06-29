@@ -1,13 +1,13 @@
 package com.uce.edu.service;
 
-import com.uce.edu.to.Estudiante;
+import com.uce.edu.to.EstudianteTo;
 
 public interface IEstudianteService {
-	void insertarEstudiante(Estudiante estudiante);
+	void insertarEstudiante(EstudianteTo estudiante);
 
-	void actualizarEstudiante(Estudiante estudiante);
+	void actualizarEstudiante(EstudianteTo estudiante);
 
-	Estudiante buscarPorCedula(String cedula);
+	EstudianteTo buscarPorCedula(String cedula);
 
 	void eliminarPorId(Integer id);
 }

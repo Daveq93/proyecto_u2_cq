@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.ProyectoU2Cq1Application;
-import com.uce.edu.to.Estudiante;
+import com.uce.edu.to.EstudianteTo;
 
 @Repository
 public class EstudianteRepoImpl implements IEstudianteRepo {
@@ -18,7 +18,7 @@ public class EstudianteRepoImpl implements IEstudianteRepo {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public void insertar(Estudiante estudiante) {
+	public void insertar(EstudianteTo estudiante) {
 		// TODO Auto-generated method stub
 		LOG.info("Insertando estudiante: "+estudiante.toString());
 		
@@ -28,7 +28,7 @@ public class EstudianteRepoImpl implements IEstudianteRepo {
 	}
 
 	@Override
-	public void actualizar(Estudiante estudiante) {
+	public void actualizar(EstudianteTo estudiante) {
 		// TODO Auto-generated method stub
 		LOG.debug("Actualizando estudiante: "+estudiante.toString());
 		this.jdbcTemplate.update("UPDATE estudiante SET nombre=?,apellido=?,cedula=?,edad=? WHERE id = ?",
@@ -37,11 +37,11 @@ public class EstudianteRepoImpl implements IEstudianteRepo {
 	}
 
 	@Override
-	public Estudiante buscar(String cedula) {
+	public EstudianteTo buscar(String cedula) {
 		// TODO Auto-generated method stub
 		LOG.debug("Buscando por cedula: "+cedula);
 		return this.jdbcTemplate.queryForObject("SELECT * FROM estudiante WHERE cedula=?", new Object[] { cedula },
-				new BeanPropertyRowMapper<Estudiante>(Estudiante.class));
+				new BeanPropertyRowMapper<EstudianteTo>(EstudianteTo.class));
 	}
 
 	@Override

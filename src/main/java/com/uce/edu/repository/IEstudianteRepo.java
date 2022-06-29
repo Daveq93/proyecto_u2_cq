@@ -1,14 +1,14 @@
 package com.uce.edu.repository;
 
-import com.uce.edu.to.Estudiante;
+import com.uce.edu.to.EstudianteTo;
 
 public interface IEstudianteRepo {
 
-	void insertar(Estudiante estudiante);
+	void insertar(EstudianteTo estudiante);
 
-	void actualizar(Estudiante estudiante);
+	void actualizar(EstudianteTo estudiante);
 
-	Estudiante buscar(String cedula);
+	EstudianteTo buscar(String cedula);
 
 	void eliminar(Integer id);
 }
