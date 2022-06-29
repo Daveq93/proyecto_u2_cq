@@ -6,10 +6,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.edu.repository.modelo.Persona;
 import com.uce.edu.service.IEstudianteService;
 import com.uce.edu.service.IPersonaJdbcService;
+import com.uce.edu.service.IPersonaJpaService;
 import com.uce.edu.to.Estudiante;
-import com.uce.edu.to.Persona;
+import com.uce.edu.to.PersonaTo;
 
 @SpringBootApplication
 public class ProyectoU2Cq1Application implements CommandLineRunner {
@@ -21,6 +23,9 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 	
 	@Autowired
 	private IEstudianteService estudianteService;
+	
+	@Autowired
+	private IPersonaJpaService personaJpaService;
 	
 
 	public static void main(String[] args) {
@@ -34,7 +39,7 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 
 		// taller 15 JDBC
 
-		Persona per1 = new Persona();
+		PersonaTo per1 = new PersonaTo();
 		per1.setId(1);
 		per1.setNombre("Cristian");
 		per1.setApellido("Quizhpe");
@@ -44,7 +49,7 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		// this.personaService.insertarPersona(per1);
 
 		// Actualizar
-		Persona per1Act = new Persona();
+		PersonaTo per1Act = new PersonaTo();
 		per1Act.setId(1);
 		per1Act.setNombre("Cristian");
 		per1Act.setApellido("Macas");
@@ -61,7 +66,7 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		//LOG.info(this.personaService.buscarPorCedula("1010101010"));
 		
 		
-		System.out.println("--------- TAREA 13 ----------");
+		//System.out.println("--------- TAREA 13 ----------");
 		
 		Estudiante e1 = new Estudiante();
 		e1.setId(1);
@@ -71,7 +76,7 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		e1.setEdad(20);
 		
 		//insertar
-		this.estudianteService.insertarEstudiante(e1);
+		//this.estudianteService.insertarEstudiante(e1);
 		
 		
 		//Actualizar
@@ -83,17 +88,65 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		e1Act.setCedula("1313131313");
 		e1Act.setEdad(20);
 		
-		this.estudianteService.actualizarEstudiante(e1Act);
+		//this.estudianteService.actualizarEstudiante(e1Act);
 		
 		//Buscar por cedula
 		
-		LOG.info(this.estudianteService.buscarPorCedula("1313131313"));
+		//LOG.info(this.estudianteService.buscarPorCedula("1313131313"));
 		
 		
 		//Eliminar por id
 		
-		this.estudianteService.eliminarPorId(2);
+		//this.estudianteService.eliminarPorId(2);
 
+		
+		
+		 //taller 16
+		
+		PersonaTo per2 = new PersonaTo();
+		per2.setId(2);
+		per2.setNombre("Paula");
+		per2.setApellido("Flores");
+		per2.setCedula("1210121315");
+
+		// insertar
+		// this.personaService.insertarPersona(per2);
+
+		
+		
+		//this.personaService.busarTodos().forEach(System.out::println);
+	
+	
+		Persona per3 = new Persona();
+		//per3.setId(2);
+		per3.setNombre("Rocio");
+		per3.setApellido("Albuja");
+		per3.setCedula("1210120001");
+	
+	
+		//this.personaJpaService.insertarPersona(per3);
+		
+		//Buscar por cedula
+		LOG.info(this.personaJpaService.buscarPorCedula("1210120001"));
+		
+		//Buscar todos
+		LOG.info(this.personaJpaService.busarTodos().toString());
+		
+		//Actualizar
+		
+		Persona per3Act = new Persona();
+		per3Act.setId(4);
+		per3Act.setNombre("RocioO");
+		per3Act.setApellido("AlbujaFA");
+		per3Act.setCedula("1210120001");
+		
+		this.personaJpaService.actualizarPersona(per3Act);
+		LOG.info(this.personaJpaService.buscarPorCedula("1210120001"));
+		
+		//Eliminar
+		
+		//this.personaJpaService.eliminarPorCedula("1210121315");
+		
 	}
 
 }

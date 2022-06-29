@@ -1,4 +1,4 @@
-package com.uce.edu.to;
+package com.uce.edu.repository.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,37 +8,26 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name="persona")
+@Entity
+@Table(name="persona") //es opcional porner el nombre de la tabla, hibernet toma el nombre de la clase
+                       //pero es buena practica especificarlo explicitamante
 public class Persona {
 
-	//@Id
-	//@Column(name = "pers_id")
-	//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_persona")
-	//@SequenceGenerator(name = "seq_persona", sequenceName = "seq_persona", allocationSize = 1)
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_persona")
+	@SequenceGenerator(name = "seq_persona", sequenceName = "seq_persona", allocationSize = 1)
 	private Integer id;
 	
-	//@Column(name ="pers_nombre")
+	@Column(name ="nombre")
 	private String nombre;
 	
-	//@Column(name="pers_apellido")
+	@Column(name="apellido")
 	private String apellido;
 
+	@Column(name="cedula")
 	private String cedula;
 	
-	
-	public Persona(Integer id, String nombre, String apellido, String cedula) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.cedula = cedula;
-	}
-
-	//Constructor por defecto
-	public Persona() {
-		//super();
-	}
 	
 	@Override
 	public String toString() {

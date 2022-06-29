@@ -5,29 +5,29 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.uce.edu.repository.IPersonaJdbcRepository;
-import com.uce.edu.to.PersonaTo;
+import com.uce.edu.repository.IPersonaJpaRepository;
+import com.uce.edu.repository.modelo.Persona;
 
 @Service
-public class PersonaJdbcServiceImpl implements IPersonaJdbcService {
+public class PersonaJpaServiceImpl implements IPersonaJpaService {
 
 	@Autowired
-	private IPersonaJdbcRepository personaRepo;
+	private IPersonaJpaRepository personaRepo;
 	
 	@Override
-	public void insertarPersona(PersonaTo persona) {
+	public void insertarPersona(Persona persona) {
 		// TODO Auto-generated method stub
 		this.personaRepo.insertar(persona);
 	}
 
 	@Override
-	public void actualizarPersona(PersonaTo persona) {
+	public void actualizarPersona(Persona persona) {
 		// TODO Auto-generated method stub
 		this.personaRepo.actualizar(persona);
 	}
 
 	@Override
-	public PersonaTo buscarPorCedula(String cedula) {
+	public Persona buscarPorCedula(String cedula) {
 		// TODO Auto-generated method stub
 		return this.personaRepo.buscar(cedula);
 	}
@@ -39,11 +39,9 @@ public class PersonaJdbcServiceImpl implements IPersonaJdbcService {
 	}
 
 	@Override
-	public List<PersonaTo> busarTodos() {
+	public List<Persona> busarTodos() {
 		// TODO Auto-generated method stub
 		return this.personaRepo.busarTodos();
 	}
-
-
 
 }
