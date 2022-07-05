@@ -127,10 +127,10 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		//this.personaJpaService.insertarPersona(per3);
 		
 		//Buscar por cedula
-		LOG.info(this.personaJpaService.buscarPorCedula("1210120001"));
+		//LOG.info(this.personaJpaService.buscarPorCedula("1210120001"));
 		
 		//Buscar todos
-		LOG.info(this.personaJpaService.busarTodos().toString());
+	//	LOG.info(this.personaJpaService.busarTodos().toString());
 		
 		//Actualizar
 		
@@ -140,12 +140,21 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		per3Act.setApellido("AlbujaFA");
 		per3Act.setCedula("1210120001");
 		
-		this.personaJpaService.actualizarPersona(per3Act);
-		LOG.info(this.personaJpaService.buscarPorCedula("1210120001"));
+	//	this.personaJpaService.actualizarPersona(per3Act);
+	//	LOG.info(this.personaJpaService.buscarPorCedula("1210120001"));
 		
 		//Eliminar
 		
 		//this.personaJpaService.eliminarPorCedula("1210121315");
+		
+		
+		Persona per4 = new Persona();
+		//per3.setId(2);
+		per4.setNombre("Juan");
+		per4.setApellido("Robles");
+		per4.setCedula("1210120009");
+	
+		this.personaJpaService.insertarPersona(per4);
 		
 	}
 

@@ -15,8 +15,8 @@ public class Persona {
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_persona")
-	@SequenceGenerator(name = "seq_persona", sequenceName = "seq_persona", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "name_generator")//name_generator son los identificadores de la secuencia, pero como buena practica se utiliza el mismo nombre de la secuencia de la base de datos, es decir "pers_id_seq"
+	@SequenceGenerator(name = "name_generator", sequenceName = "pers_id_seq", allocationSize = 1)//sequenceName -> obligatorio debe tener el mismo nomnbre que se espesifico en la base de datos
 	private Integer id;
 	
 	@Column(name ="nombre")
