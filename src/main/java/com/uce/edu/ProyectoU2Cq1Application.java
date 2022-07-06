@@ -1,5 +1,7 @@
 package com.uce.edu;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -154,8 +156,29 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		per4.setApellido("Robles");
 		per4.setCedula("1210120009");
 	
-		this.personaJpaService.insertarPersona(per4);
+		//this.personaJpaService.insertarPersona(per4);
 		
+		//Taller 18
+		
+		Persona per5 = new Persona();
+		per5.setNombre("Pedro");
+		per5.setApellido("Robles");
+		per5.setCedula("121012001515");
+		per5.setGenero("M");
+		
+		//this.personaJpaService.insertarPersona(per5);
+		
+		
+		LOG.info(this.personaJpaService.buscarPorCedula("1210120009").toString());
+		
+		
+		
+		
+		List<Persona>  listaPer= this.personaJpaService.buscarPorApellido("Robles");
+		
+		for (Persona item : listaPer) {
+			LOG.info(item);
+		}
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
@@ -36,17 +37,22 @@ public class PersonaJpaRepoImpl implements IPersonaJpaRepository{
 	}
 
 	@Override
-	public Persona buscar(String cedula) {
+	public Persona buscarCedula(String cedula) {
 		// TODO Auto-generated method stub
-		TypedQuery<Persona> myQ = this.em.createQuery("SELECT p FROM Persona p where p.cedula=:valor",Persona.class);
-		myQ.setParameter("valor", cedula);
-		return myQ.getSingleResult();
+		LOG.debug("Buscando por cedula");
+//		TypedQuery<Persona> myQ = this.em.createQuery("SELECT p FROM Persona p where p.cedula=:valor",Persona.class);
+//		myQ.setParameter("valor", cedula);
+		
+		Query jpqlQuery = this.em.createQuery("SELECT p FROM Persona p where p.cedula=:valorCedula");
+		jpqlQuery.setParameter("valorCedula", cedula);
+		
+		return (Persona) jpqlQuery.getSingleResult();
 	}
 
 	@Override
 	public void eliminar(String cedula) {
 		// TODO Auto-generated method stub
-		Persona p = this.buscar(cedula);
+		Persona p = this.buscarCedula(cedula);
 		this.em.remove(p);
 	}
 
@@ -55,6 +61,27 @@ public class PersonaJpaRepoImpl implements IPersonaJpaRepository{
 		// TODO Auto-generated method stub
 		TypedQuery<Persona> myQ = this.em.createQuery("SELECT p FROM Persona p",Persona.class);
 		return myQ.getResultList();
+	}
+
+	@Override
+	public Persona buscarId(Integer id) {
+		// TODO Auto-generated method stub
+		return this.em.find(Persona.class, id);
+	}
+
+	@Override
+	public List<Persona> buscarPorApellido(String apellido) {
+		Query jpqlQuery = this.em.createQuery("SELECT p FROM Persona p where p.apellido=:apellido");
+		jpqlQuery.setParameter("apellido", apellido);
+		return jpqlQuery.getResultList();
+	}
+
+	@Override
+	public List<Persona> buscarPorGenero(String genero) {
+		// TODO Auto-generated method stub
+		//Query jpqlQuery = this.em.createQuery("SELECT p FROM Persona p where p.genero=:genero");
+		//jpqlQuery.setParameter("genero", genero);
+		return null;
 	}
 
 }

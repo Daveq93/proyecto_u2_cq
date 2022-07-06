@@ -14,24 +14,30 @@ import javax.persistence.Table;
 public class Persona {
 
 	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "name_generator")//name_generator son los identificadores de la secuencia, pero como buena practica se utiliza el mismo nombre de la secuencia de la base de datos, es decir "pers_id_seq"
-	@SequenceGenerator(name = "name_generator", sequenceName = "pers_id_seq", allocationSize = 1)//sequenceName -> obligatorio debe tener el mismo nomnbre que se espesifico en la base de datos
+	@Column(name = "pers_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pers_id_seq")//name_generator son los identificadores de la secuencia, pero como buena practica se utiliza el mismo nombre de la secuencia de la base de datos, es decir "pers_id_seq"
+	@SequenceGenerator(name = "pers_id_seq", sequenceName = "pers_id_seq", allocationSize = 1)//sequenceName -> obligatorio debe tener el mismo nomnbre que se espesifico en la base de datos
 	private Integer id;
 	
-	@Column(name ="nombre")
+	@Column(name ="pers_nombre")
 	private String nombre;
 	
-	@Column(name="apellido")
+	@Column(name="pers_apellido")
 	private String apellido;
 
-	@Column(name="cedula")
+	@Column(name="pers_cedula")
 	private String cedula;
 	
+	@Column(name="pers_genero")
+	private String genero;
 	
+	
+
+
 	@Override
 	public String toString() {
-		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + "]";
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
+				+ ", genero=" + genero + "]";
 	}
 
 	//set and get
@@ -66,9 +72,14 @@ public class Persona {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	
-	
-	
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
 	
 	
 }

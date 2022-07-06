@@ -11,4 +11,8 @@ public interface IPersonaJpaService {
 	void eliminarPorCedula(String cedula);
 	
 	List<Persona> busarTodos();
+	
+	Persona buscarId(Integer id);
+	List<Persona> buscarPorApellido(String apellido);
+	List<Persona> buscarPorGenero(String genero);
 }

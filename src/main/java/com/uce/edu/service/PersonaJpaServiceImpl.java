@@ -29,7 +29,7 @@ public class PersonaJpaServiceImpl implements IPersonaJpaService {
 	@Override
 	public Persona buscarPorCedula(String cedula) {
 		// TODO Auto-generated method stub
-		return this.personaRepo.buscar(cedula);
+		return this.personaRepo.buscarCedula(cedula);
 	}
 
 	@Override
@@ -42,6 +42,23 @@ public class PersonaJpaServiceImpl implements IPersonaJpaService {
 	public List<Persona> busarTodos() {
 		// TODO Auto-generated method stub
 		return this.personaRepo.busarTodos();
+	}
+
+	@Override
+	public Persona buscarId(Integer id) {
+		// TODO Auto-generated method stub
+		return this.personaRepo.buscarId(id);
+	}
+
+	@Override
+	public List<Persona> buscarPorApellido(String apellido) {
+		return this.personaRepo.buscarPorApellido(apellido);
+	}
+
+	@Override
+	public List<Persona> buscarPorGenero(String genero) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
