@@ -179,6 +179,13 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		for (Persona item : listaPer) {
 			LOG.info(item);
 		}
+		
+		
+		//Tarea
+		
+		LOG.info(this.personaJpaService.buscarPorGenero("M").toString());
+		
+		LOG.info(this.personaJpaService.buscarPorNombre("Juan").toString());
 	}
 
 }

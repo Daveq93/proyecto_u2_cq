@@ -34,19 +34,16 @@ public class PersonaJpaServiceImpl implements IPersonaJpaService {
 
 	@Override
 	public void eliminarPorCedula(String cedula) {
-		// TODO Auto-generated method stub
 		this.personaRepo.eliminar(cedula);
 	}
 
 	@Override
 	public List<Persona> busarTodos() {
-		// TODO Auto-generated method stub
 		return this.personaRepo.busarTodos();
 	}
 
 	@Override
 	public Persona buscarId(Integer id) {
-		// TODO Auto-generated method stub
 		return this.personaRepo.buscarId(id);
 	}
 
@@ -57,8 +54,12 @@ public class PersonaJpaServiceImpl implements IPersonaJpaService {
 
 	@Override
 	public List<Persona> buscarPorGenero(String genero) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.personaRepo.buscarPorGenero(genero);
+	}
+
+	@Override
+	public List<Persona> buscarPorNombre(String nombre) {
+		return this.personaRepo.buscarPorNombre(nombre) ;
 	}
 
 }
