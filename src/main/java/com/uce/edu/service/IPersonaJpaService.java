@@ -16,4 +16,7 @@ public interface IPersonaJpaService {
 	List<Persona> buscarPorApellido(String apellido);
 	List<Persona> buscarPorGenero(String genero);
 	List<Persona>buscarPorNombre(String nombre);
+	
+	public Integer actualizarPorApellido(String genero,String apellido);
+	public Integer eliminarPorGenero(String genero);
 }

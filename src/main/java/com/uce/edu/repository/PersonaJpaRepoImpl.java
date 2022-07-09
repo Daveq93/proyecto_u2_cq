@@ -17,12 +17,12 @@ import com.uce.edu.repository.modelo.Persona;
 
 @Repository
 @Transactional
-public class PersonaJpaRepoImpl implements IPersonaJpaRepository{
+public class PersonaJpaRepoImpl implements IPersonaJpaRepository {
 	private static Logger LOG = Logger.getLogger(PersonaJpaRepoImpl.class);
-	
+
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Override
 	public void insertar(Persona persona) {
 		// TODO Auto-generated method stub
@@ -32,7 +32,7 @@ public class PersonaJpaRepoImpl implements IPersonaJpaRepository{
 	@Override
 	public void actualizar(Persona persona) {
 		// TODO Auto-generated method stub
-		LOG.debug("Actualizar persona: "+persona.toString());
+		LOG.debug("Actualizar persona: " + persona.toString());
 		this.em.merge(persona);
 	}
 
@@ -42,10 +42,10 @@ public class PersonaJpaRepoImpl implements IPersonaJpaRepository{
 		LOG.debug("Buscando por cedula");
 //		TypedQuery<Persona> myQ = this.em.createQuery("SELECT p FROM Persona p where p.cedula=:valor",Persona.class);
 //		myQ.setParameter("valor", cedula);
-		
+
 		Query jpqlQuery = this.em.createQuery("SELECT p FROM Persona p where p.cedula=:valorCedula");
 		jpqlQuery.setParameter("valorCedula", cedula);
-		
+
 		return (Persona) jpqlQuery.getSingleResult();
 	}
 
@@ -59,7 +59,7 @@ public class PersonaJpaRepoImpl implements IPersonaJpaRepository{
 	@Override
 	public List<Persona> busarTodos() {
 		// TODO Auto-generated method stub
-		TypedQuery<Persona> myQ = this.em.createQuery("SELECT p FROM Persona p",Persona.class);
+		TypedQuery<Persona> myQ = this.em.createQuery("SELECT p FROM Persona p", Persona.class);
 		return myQ.getResultList();
 	}
 
@@ -90,6 +90,24 @@ public class PersonaJpaRepoImpl implements IPersonaJpaRepository{
 		Query jpqlQuery = this.em.createQuery("SELECT p FROM Persona p where p.nombre=:nombre");
 		jpqlQuery.setParameter("nombre", nombre);
 		return jpqlQuery.getResultList();
+	}
+
+	@Override
+	public Integer actualizarPorApellido(String genero, String apellido) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.em.createQuery("UPDATE Persona p SET p.genero=:datoGenero WHERE p.apellido=:datoApellido");
+        myQuery.setParameter("datoGenero", genero);
+        myQuery.setParameter("datoApellido", apellido);
+		
+        return myQuery.executeUpdate();
+	}
+
+	@Override
+	public Integer eliminarPorGenero(String genero) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.em.createQuery("DELETE FROM Persona p WHERE p.genero=:datoGenero");
+		myQuery.setParameter("datoGenero", genero);
+		return myQuery.executeUpdate();
 	}
 
 }
