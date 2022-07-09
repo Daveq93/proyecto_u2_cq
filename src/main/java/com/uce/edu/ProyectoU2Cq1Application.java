@@ -1,6 +1,8 @@
 package com.uce.edu;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.Month;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.edu.prueba.modelo.Propietario;
+import com.uce.edu.prueba.modelo.Vehiculo;
+import com.uce.edu.prueba.service.IGestorMatriculaService;
+import com.uce.edu.prueba.service.IPropietarioService;
+import com.uce.edu.prueba.service.IVehiculoService;
 import com.uce.edu.repository.modelo.Persona;
 import com.uce.edu.service.IEstudianteService;
 import com.uce.edu.service.IPersonaJdbcService;
@@ -28,7 +35,16 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 
 	@Autowired
 	private IPersonaJpaService personaJpaService;
+	
+	@Autowired
+	private IGestorMatriculaService gestorMatriculaService;
+	
+	@Autowired
+	private IPropietarioService propietarioService;
 
+	@Autowired
+	private IVehiculoService vehiculoService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2Cq1Application.class, args);
 	}
@@ -190,10 +206,38 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		// this.personaJpaService.insertarPersona(per1);
 		// this.personaJpaService.insertarPersona(per6);
 
-		 LOG.info(this.personaJpaService.actualizarPorApellido("FE", "Mora"));
+		// LOG.info(this.personaJpaService.actualizarPorApellido("FE", "Mora"));
 
-		LOG.info(this.personaJpaService.eliminarPorGenero("FE"));
-
+		//LOG.info(this.personaJpaService.eliminarPorGenero("FE"));
+		
+		System.out.println("----------- TAREA 16  --------------");
+		
+		Vehiculo v = new Vehiculo();
+		v.setMarca("Mazda");
+		v.setPlaca("ASB-1245");
+		v.setPrecio(new BigDecimal(25000));
+		v.setTipo("L");
+		
+		//1. crear un vehiculo
+		//this.vehiculoService.insertarVehiculo(v);
+		
+	   //Actualizar
+		v.setMarca("Mazda-X");
+		//this.vehiculoService.actualizarVehiculo(v);
+		
+		Propietario p1 = new Propietario();
+		p1.setApellido("Quizhpe");
+		p1.setCedula("1105353889");
+		p1.setFechaNacimiento(LocalDateTime.of(2000, Month.DECEMBER,15,0,0));
+		p1.setNombre("Cristian");
+		
+		//insertar propietario
+		//this.propietarioService.insertarPropietario(p1);
+		
+		
+		//crear matricula
+		this.gestorMatriculaService.matricularVehiculo("1105353889","ASB-1245");
+		
 	}
 
 }
