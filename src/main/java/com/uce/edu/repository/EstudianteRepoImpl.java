@@ -1,54 +1,101 @@
 package com.uce.edu.repository;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
+
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
+
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.ProyectoU2Cq1Application;
-import com.uce.edu.to.Estudiante;
+
+import com.uce.edu.repository.modelo.Estudiante;
+import com.uce.edu.to.EstudianteTo;
 
 @Repository
+@Transactional
 public class EstudianteRepoImpl implements IEstudianteRepo {
 
 	private static Logger LOG = Logger.getLogger(EstudianteRepoImpl.class);
-	
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
 
+	@PersistenceContext
+	private EntityManager em;
+	
 	@Override
 	public void insertar(Estudiante estudiante) {
 		// TODO Auto-generated method stub
-		LOG.info("Insertando estudiante: "+estudiante.toString());
-		
-		this.jdbcTemplate.update("INSERT INTO estudiante (id,nombre,apellido, cedula,edad) VALUES (?,?,?,?,?)",
-				new Object[] { estudiante.getId(), estudiante.getNombre(), estudiante.getApellido(),
-						estudiante.getCedula(), estudiante.getEdad() });
+		this.em.persist(estudiante);
 	}
 
 	@Override
 	public void actualizar(Estudiante estudiante) {
 		// TODO Auto-generated method stub
-		LOG.debug("Actualizando estudiante: "+estudiante.toString());
-		this.jdbcTemplate.update("UPDATE estudiante SET nombre=?,apellido=?,cedula=?,edad=? WHERE id = ?",
-				new Object[] { estudiante.getNombre(), estudiante.getApellido(), estudiante.getCedula(),
-						estudiante.getEdad(), estudiante.getId() });
+		this.em.merge(estudiante);
 	}
 
 	@Override
-	public Estudiante buscar(String cedula) {
-		// TODO Auto-generated method stub
-		LOG.debug("Buscando por cedula: "+cedula);
-		return this.jdbcTemplate.queryForObject("SELECT * FROM estudiante WHERE cedula=?", new Object[] { cedula },
-				new BeanPropertyRowMapper<Estudiante>(Estudiante.class));
+	public Estudiante buscarPorCedulaTyped(String cedula) {
+		LOG.debug("Buscando por cedula TYPED QUERY");
+		TypedQuery<Estudiante> myQuery = this.em.createQuery("SELECT e FROM Estudiante e WHERE e.cedula=:cedula",Estudiante.class);
+		myQuery.setParameter("cedula", cedula);
+		return myQuery.getSingleResult();
 	}
 
 	@Override
-	public void eliminar(Integer id) {
+	public List<Estudiante> buscarMenoresTyped(Integer edad) {
 		// TODO Auto-generated method stub
-		LOG.info("Eliminando por id: "+id);
-		this.jdbcTemplate.update("DELETE FROM estudiante WHERE id=?", new Object[] { id });
+		LOG.debug("Bucando menores a: "+edad +" TYPED QUERY");
+		TypedQuery<Estudiante> myQuery = this.em.createQuery("SELECT e FROM Estudiante e WHERE e.edad<=:edad",Estudiante.class);
+		myQuery.setParameter("edad", edad);
+		return myQuery.getResultList();
 	}
+
+	@Override
+	public List<Estudiante> buscarporSemestreNamed(String semestre) {
+		LOG.debug("buscando por semestre NAMED QUERY");
+		Query myQuery = this.em.createNamedQuery("Estudiante.buscarPorSemestre");
+		myQuery.setParameter("semestre", semestre);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorNombreApellidoNamed(String nombre, String apellido) {
+		LOG.debug("Buscando por Nombre y Apellido NAMED QUERY");
+		Query myQuery = this.em.createNamedQuery("Estudiante.buscarPorNombreApellido");
+		myQuery.setParameter("nombre", nombre);
+		myQuery.setParameter("apellido", apellido);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorSemestreTypedNamed(String semestre) {
+		LOG.debug("Buscando por semestre TYPED NAMED QUERY");
+		TypedQuery<Estudiante> myQ = this.em.createNamedQuery("Estudiante.buscarPorSemestre", Estudiante.class);
+		myQ.setParameter("semestre", semestre);
+		return myQ.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorApellidoMenoresATypedNamed(String apellido,Integer edad) {
+		LOG.debug("Buscando por apellido y menores a: "+edad+" TYPED NAMED QUERY");
+		TypedQuery<Estudiante> myQ= this.em.createNamedQuery("Estudiante.buscarPorApellidoMenoresA", Estudiante.class);
+		myQ.setParameter("apellido",apellido );
+		myQ.setParameter("edad", edad);
+		return myQ.getResultList();
+	}
+
+	@Override
+	public void eliminar(String cedula) {
+		Query myQ = this.em.createQuery("DELETE e FROM Estudiante e WHERE e.cedula=:cedula");
+		myQ.setParameter("cedula", cedula);
+		myQ.executeUpdate();
+		
+	}
+	
+	
 
 }

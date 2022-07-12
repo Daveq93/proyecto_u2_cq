@@ -1,13 +1,26 @@
 package com.uce.edu.service;
 
-import com.uce.edu.to.Estudiante;
+import java.util.List;
+
+import com.uce.edu.repository.modelo.Estudiante;
+
 
 public interface IEstudianteService {
-	void insertarEstudiante(Estudiante estudiante);
+	void insertar(Estudiante estudiante);
 
-	void actualizarEstudiante(Estudiante estudiante);
+	void actualizar(Estudiante estudiante);
 
-	Estudiante buscarPorCedula(String cedula);
+	Estudiante buscarPorCedulaTyped(String cedula);
 
-	void eliminarPorId(Integer id);
+	List<Estudiante> buscarMenoresTyped(Integer edad);
+
+	List<Estudiante> buscarporSemestreNamed(String semestre);
+	
+	List<Estudiante> buscarPorNombreApellidoNamed(String nombre, String apellido);
+	
+	List<Estudiante> buscarPorSemestreTypedNamed(String semestre);
+	
+	List<Estudiante> buscarPorApellidoMenoresATypedNamed(String apellido,Integer edad);
+
+	void eliminar(String cedula);
 }

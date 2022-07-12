@@ -16,11 +16,12 @@ import com.uce.edu.prueba.modelo.Vehiculo;
 import com.uce.edu.prueba.service.IGestorMatriculaService;
 import com.uce.edu.prueba.service.IPropietarioService;
 import com.uce.edu.prueba.service.IVehiculoService;
+import com.uce.edu.repository.modelo.Estudiante;
 import com.uce.edu.repository.modelo.Persona;
 import com.uce.edu.service.IEstudianteService;
 import com.uce.edu.service.IPersonaJdbcService;
 import com.uce.edu.service.IPersonaJpaService;
-import com.uce.edu.to.Estudiante;
+import com.uce.edu.to.EstudianteTo;
 import com.uce.edu.to.PersonaTo;
 
 @SpringBootApplication
@@ -36,16 +37,16 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 
 	@Autowired
 	private IPersonaJpaService personaJpaService;
-	
+
 	@Autowired
 	private IGestorMatriculaService gestorMatriculaService;
-	
+
 	@Autowired
 	private IPropietarioService propietarioService;
 
 	@Autowired
 	private IVehiculoService vehiculoService;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2Cq1Application.class, args);
 	}
@@ -83,19 +84,19 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 
 		// System.out.println("--------- TAREA 13 ----------");
 
-		Estudiante e1 = new Estudiante();
-		e1.setId(1);
-		e1.setNombre("Paula");
-		e1.setApellido("Robles");
-		e1.setCedula("1313131313");
-		e1.setEdad(20);
+//		EstudianteTo e1 = new EstudianteTo();
+//		e1.setId(1);
+//		e1.setNombre("Paula");
+//		e1.setApellido("Robles");
+//		e1.setCedula("1313131313");
+//		e1.setEdad(20);
 
 		// insertar
 		// this.estudianteService.insertarEstudiante(e1);
 
 		// Actualizar
 
-		Estudiante e1Act = new Estudiante();
+		EstudianteTo e1Act = new EstudianteTo();
 		e1Act.setId(1);
 		e1Act.setNombre("Paula");
 		e1Act.setApellido("Robles Vaca");
@@ -209,39 +210,37 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 
 		// LOG.info(this.personaJpaService.actualizarPorApellido("FE", "Mora"));
 
-		//LOG.info(this.personaJpaService.eliminarPorGenero("FE"));
-		
+		// LOG.info(this.personaJpaService.eliminarPorGenero("FE"));
+
 		System.out.println("----------- TAREA 16  --------------");
-		
+
 		Vehiculo v = new Vehiculo();
 		v.setMarca("Mazda");
 		v.setPlaca("ASB-1245");
 		v.setPrecio(new BigDecimal(25000));
 		v.setTipo("L");
-		
-		//1. crear un vehiculo
-		//this.vehiculoService.insertarVehiculo(v);
-		
-	   //Actualizar
+
+		// 1. crear un vehiculo
+		// this.vehiculoService.insertarVehiculo(v);
+
+		// Actualizar
 		v.setMarca("Mazda-X");
-		//this.vehiculoService.actualizarVehiculo(v);
-		
+		// this.vehiculoService.actualizarVehiculo(v);
+
 		Propietario p1 = new Propietario();
 		p1.setApellido("Quizhpe");
 		p1.setCedula("1105353889");
-		p1.setFechaNacimiento(LocalDateTime.of(2000, Month.DECEMBER,15,0,0));
+		p1.setFechaNacimiento(LocalDateTime.of(2000, Month.DECEMBER, 15, 0, 0));
 		p1.setNombre("Cristian");
-		
-		//insertar propietario
-		//this.propietarioService.insertarPropietario(p1);
-		
-		
-		//crear matricula
-		//this.gestorMatriculaService.matricularVehiculo("1105353889","ASB-1245");
-		
-		
+
+		// insertar propietario
+		// this.propietarioService.insertarPropietario(p1);
+
+		// crear matricula
+		// this.gestorMatriculaService.matricularVehiculo("1105353889","ASB-1245");
+
 		System.out.println("--------------- Taller 20 -------------");
-	
+
 		Persona per7 = new Persona();
 		per7.setNombre("Pedro");
 		per7.setApellido("Robles");
@@ -249,21 +248,96 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		per7.setGenero("M");
 
 		// this.personaJpaService.insertarPersona(per7);
-		
-		
-		LOG.info(this.personaJpaService.buscarCedulaNamed("1210120009"));
-		LOG.info(this.personaJpaService.buscarCedulaTyped("121012001515"));
-		LOG.info(this.personaJpaService.buscarCedulaTypedNamed("1010101515"));
-		
-		List<Persona> listaPersonas = this.personaJpaService.buscarPorNombreApellidoNamed("Pedro", "Robles");
-		
-	    for (Persona per : listaPersonas) {
-			LOG.info(per);
+
+//		LOG.info(this.personaJpaService.buscarCedulaNamed("1210120009"));
+//		LOG.info(this.personaJpaService.buscarCedulaTyped("121012001515"));
+//		LOG.info(this.personaJpaService.buscarCedulaTypedNamed("1010101515"));
+//		
+//		List<Persona> listaPersonas = this.personaJpaService.buscarPorNombreApellidoNamed("Pedro", "Robles");
+//		
+//	    for (Persona per : listaPersonas) {
+//			LOG.info(per);
+//		}
+//		
+
+		System.out.println("-------------- TAREA 17 ---------------------");
+
+		Estudiante e1 = new Estudiante();
+		e1.setApellido("Corral");
+		e1.setCedula("1215489870");
+		e1.setEdad(18);
+		e1.setNombre("Ana");
+		e1.setSemestre("Segundo");
+
+		Estudiante e2 = new Estudiante();
+		e2.setApellido("Vinueza");
+		e2.setCedula("1598612987");
+		e2.setEdad(19);
+		e2.setNombre("Maria");
+		e2.setSemestre("Segundo");
+
+		Estudiante e3 = new Estudiante();
+		e3.setApellido("Zapata");
+		e3.setCedula("1980032157");
+		e3.setEdad(20);
+		e3.setNombre("Pedro");
+		e3.setSemestre("Tercero");
+
+		Estudiante e4 = new Estudiante();
+		e4.setApellido("Ruiz");
+		e4.setCedula("1980014499");
+		e4.setEdad(18);
+		e4.setNombre("Karen");
+		e4.setSemestre("Segundo");
+
+//	this.estudianteService.insertar(e1);
+//	this.estudianteService.insertar(e2);
+//	this.estudianteService.insertar(e3);
+//	this.estudianteService.insertar(e4);
+
+		/*
+		 * Estudiante buscarPorCedulaTyped(String cedula);
+		 * 
+		 * List<Estudiante> buscarMenoresTyped(Integer edad);
+		 * 
+		 * List<Estudiante> buscarporSemestreNamed(String semestre);
+		 * 
+		 * List<Estudiante> buscarPorNombreApellidoNamed(String nombre, String
+		 * apellido);
+		 * 
+		 * List<Estudiante> buscarPorSemestreTypedNamed(String semestre);
+		 * 
+		 * List<Estudiante> buscarPorApellidoMenoresATypedNamed(String apellido,Integer
+		 * edad);
+		 */
+
+		LOG.info(this.estudianteService.buscarPorCedulaTyped("1980014499"));
+
+		List<Estudiante> lista1 = this.estudianteService.buscarMenoresTyped(20);
+		for (Estudiante estu : lista1) {
+			LOG.info(estu);
+		}
+
+		List<Estudiante> lista2 = this.estudianteService.buscarporSemestreNamed("Segundo");
+		for (Estudiante estu : lista2) {
+			LOG.info(estu);
 		}
 		
+		List<Estudiante> lista3 = this.estudianteService.buscarPorNombreApellidoNamed("maria","Vinueza" );
+		for (Estudiante estu : lista3) {
+			LOG.info(estu);
+		}
 		
-	
-	
+		List<Estudiante> lista4 = this.estudianteService.buscarPorSemestreTypedNamed("Tercero");
+		for (Estudiante estu : lista4) {
+			LOG.info(estu);
+		}
+
+		List<Estudiante> lista5 = this.estudianteService.buscarPorApellidoMenoresATypedNamed("Ruiz", 19);
+		for (Estudiante estu : lista5) {
+			LOG.info(estu);
+		}
+		
 	}
 
 }

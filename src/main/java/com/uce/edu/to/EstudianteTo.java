@@ -1,18 +1,18 @@
 package com.uce.edu.to;
 
 
-public class Estudiante {
+public class EstudianteTo {
 
 	private Integer id;
 	private String nombre;
 	private String apellido;
 	private String cedula;
 
-	public Estudiante() {
+	public EstudianteTo() {
 		super();
 	}
 
-	public Estudiante(Integer id, String nombre, String apellido, String cedula, Integer edad) {
+	public EstudianteTo(Integer id, String nombre, String apellido, String cedula, Integer edad) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
