@@ -5,12 +5,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name="persona") //es opcional porner el nombre de la tabla, hibernet toma el nombre de la clase
                        //pero es buena practica especificarlo explicitamante
+//@NamedQueries({/* el mas antiguo */
+//	@NamedQuery(name="Persona.buscarPorCedula",query = "Select p FROM Persona p where p.cedula=:cedula"),
+//	@NamedQuery(name="Persona.buscarPorNombreApellido",query = "SELECT p FROM Persona p WHERE p.nombre=:nombre AND p.apellido=:apellido")
+//})
+
+//Forma actual, la mas usada y el que usaremos
+	@NamedQuery(name="Persona.buscarPorCedula",query = "Select p FROM Persona p where p.cedula=:cedula")
+	@NamedQuery(name="Persona.buscarPorNombreApellido",query = "SELECT p FROM Persona p WHERE p.nombre=:nombre AND p.apellido=:apellido")
 public class Persona {
 
 	@Id
@@ -30,56 +41,6 @@ public class Persona {
 	
 	@Column(name="pers_genero")
 	private String genero;
-	
-	
-
-
-	@Override
-	public String toString() {
-		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
-				+ ", genero=" + genero + "]";
-	}
-
-	//set and get
-	public Integer getId() {
-		return id;
-	}
-
-	public String getCedula() {
-		return cedula;
-	}
-
-	public void setCedula(String cedula) {
-		this.cedula = cedula;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	public String getGenero() {
-		return genero;
-	}
-
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-	
+		
 	
 }

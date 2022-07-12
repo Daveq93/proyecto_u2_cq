@@ -10,18 +10,31 @@ public interface IPersonaJpaRepository {
 	void actualizar(Persona persona);
 
 	Persona buscarCedula(String cedula);
-	
-	
+
+	Persona buscarCedulaTyped(String cedula);
+
+	Persona buscarCedulaNamed(String cedula);
+
+	Persona buscarCedulaTypedNamed(String cedula);
 
 	void eliminar(String cedula);
 
 	List<Persona> busarTodos();
-	
+
 	Persona buscarId(Integer id);
+
 	List<Persona> buscarPorApellido(String apellido);
+
 	List<Persona> buscarPorGenero(String genero);
-	List<Persona>buscarPorNombre(String nombre);
-	
-	public Integer actualizarPorApellido(String genero,String apellido);
-	public Integer eliminarPorGenero(String genero);
+
+	List<Persona> buscarPorNombre(String nombre);
+
+	 Integer actualizarPorApellido(String genero, String apellido);
+
+	 Integer eliminarPorGenero(String genero);
+	 
+	 List<Persona> buscarPorNombreApellidoNamed(String nombre, String apellido);
+
+
+
 }

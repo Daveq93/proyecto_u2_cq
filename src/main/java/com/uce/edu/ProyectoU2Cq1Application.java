@@ -3,6 +3,7 @@ package com.uce.edu;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -236,8 +237,33 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		
 		
 		//crear matricula
-		this.gestorMatriculaService.matricularVehiculo("1105353889","ASB-1245");
+		//this.gestorMatriculaService.matricularVehiculo("1105353889","ASB-1245");
 		
+		
+		System.out.println("--------------- Taller 20 -------------");
+	
+		Persona per7 = new Persona();
+		per7.setNombre("Pedro");
+		per7.setApellido("Robles");
+		per7.setCedula("1105161819");
+		per7.setGenero("M");
+
+		// this.personaJpaService.insertarPersona(per7);
+		
+		
+		LOG.info(this.personaJpaService.buscarCedulaNamed("1210120009"));
+		LOG.info(this.personaJpaService.buscarCedulaTyped("121012001515"));
+		LOG.info(this.personaJpaService.buscarCedulaTypedNamed("1010101515"));
+		
+		List<Persona> listaPersonas = this.personaJpaService.buscarPorNombreApellidoNamed("Pedro", "Robles");
+		
+	    for (Persona per : listaPersonas) {
+			LOG.info(per);
+		}
+		
+		
+	
+	
 	}
 
 }

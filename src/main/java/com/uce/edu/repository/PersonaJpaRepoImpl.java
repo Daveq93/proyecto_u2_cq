@@ -9,10 +9,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.uce.edu.ProyectoU2Cq1Application;
 import com.uce.edu.repository.modelo.Persona;
 
 @Repository
@@ -40,9 +37,6 @@ public class PersonaJpaRepoImpl implements IPersonaJpaRepository {
 	public Persona buscarCedula(String cedula) {
 		// TODO Auto-generated method stub
 		LOG.debug("Buscando por cedula");
-//		TypedQuery<Persona> myQ = this.em.createQuery("SELECT p FROM Persona p where p.cedula=:valor",Persona.class);
-//		myQ.setParameter("valor", cedula);
-
 		Query jpqlQuery = this.em.createQuery("SELECT p FROM Persona p where p.cedula=:valorCedula");
 		jpqlQuery.setParameter("valorCedula", cedula);
 
@@ -108,6 +102,41 @@ public class PersonaJpaRepoImpl implements IPersonaJpaRepository {
 		Query myQuery = this.em.createQuery("DELETE FROM Persona p WHERE p.genero=:datoGenero");
 		myQuery.setParameter("datoGenero", genero);
 		return myQuery.executeUpdate();
+	}
+
+	@Override
+	public Persona buscarCedulaTyped(String cedula) {
+		LOG.info("Buscando por cedula TYPED QUERY");
+		TypedQuery<Persona> miQuery = this.em.createQuery("Select p FROM Persona p where p.cedula=:cedula",Persona.class);
+		miQuery.setParameter("cedula", cedula);
+		return miQuery.getSingleResult();
+	}
+
+
+	@Override
+	public Persona buscarCedulaNamed(String cedula) {
+		LOG.info("Buscando con NAMED QUERY");
+		Query myQuery =this.em.createNamedQuery("Persona.buscarPorCedula");
+		myQuery.setParameter("cedula", cedula);
+		return (Persona) myQuery.getSingleResult();
+	}
+
+	@Override
+	public Persona buscarCedulaTypedNamed(String cedula) {
+		
+		LOG.info("Busando por cedula -> TYPED - NAMED QUERY");
+		TypedQuery<Persona> myQuery =this.em.createNamedQuery("Persona.buscarPorCedula",Persona.class);
+		myQuery.setParameter("cedula", cedula);
+		return myQuery.getSingleResult();
+	}
+
+	@Override
+	public List<Persona> buscarPorNombreApellidoNamed(String nombre, String apellido) {
+		LOG.info("Busando por nombre y apellido -> NAMED QUERY");
+		TypedQuery<Persona> myQuery =this.em.createNamedQuery("Persona.buscarPorNombreApellido",Persona.class);
+		myQuery.setParameter("nombre", nombre);
+		myQuery.setParameter("apellido", apellido);
+		return myQuery.getResultList();
 	}
 
 }
