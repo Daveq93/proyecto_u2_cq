@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -22,6 +23,9 @@ import lombok.Data;
 //Forma actual, la mas usada y el que usaremos
 	@NamedQuery(name="Persona.buscarPorCedula",query = "Select p FROM Persona p where p.cedula=:cedula")
 	@NamedQuery(name="Persona.buscarPorNombreApellido",query = "SELECT p FROM Persona p WHERE p.nombre=:nombre AND p.apellido=:apellido")
+
+    @NamedNativeQuery(name="Persona.buscarPorCedulaNative",query = "SELECT * FROM persona WHERE pers_cedula=:cedula",resultClass = Persona.class)
+
 public class Persona {
 
 	@Id

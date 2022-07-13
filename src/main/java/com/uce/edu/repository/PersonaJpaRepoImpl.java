@@ -6,6 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
@@ -90,10 +93,10 @@ public class PersonaJpaRepoImpl implements IPersonaJpaRepository {
 	public Integer actualizarPorApellido(String genero, String apellido) {
 		// TODO Auto-generated method stub
 		Query myQuery = this.em.createQuery("UPDATE Persona p SET p.genero=:datoGenero WHERE p.apellido=:datoApellido");
-        myQuery.setParameter("datoGenero", genero);
-        myQuery.setParameter("datoApellido", apellido);
-		
-        return myQuery.executeUpdate();
+		myQuery.setParameter("datoGenero", genero);
+		myQuery.setParameter("datoApellido", apellido);
+
+		return myQuery.executeUpdate();
 	}
 
 	@Override
@@ -107,25 +110,25 @@ public class PersonaJpaRepoImpl implements IPersonaJpaRepository {
 	@Override
 	public Persona buscarCedulaTyped(String cedula) {
 		LOG.info("Buscando por cedula TYPED QUERY");
-		TypedQuery<Persona> miQuery = this.em.createQuery("Select p FROM Persona p where p.cedula=:cedula",Persona.class);
+		TypedQuery<Persona> miQuery = this.em.createQuery("Select p FROM Persona p where p.cedula=:cedula",
+				Persona.class);
 		miQuery.setParameter("cedula", cedula);
 		return miQuery.getSingleResult();
 	}
 
-
 	@Override
 	public Persona buscarCedulaNamed(String cedula) {
 		LOG.info("Buscando con NAMED QUERY");
-		Query myQuery =this.em.createNamedQuery("Persona.buscarPorCedula");
+		Query myQuery = this.em.createNamedQuery("Persona.buscarPorCedula");
 		myQuery.setParameter("cedula", cedula);
 		return (Persona) myQuery.getSingleResult();
 	}
 
 	@Override
 	public Persona buscarCedulaTypedNamed(String cedula) {
-		
+
 		LOG.info("Busando por cedula -> TYPED - NAMED QUERY");
-		TypedQuery<Persona> myQuery =this.em.createNamedQuery("Persona.buscarPorCedula",Persona.class);
+		TypedQuery<Persona> myQuery = this.em.createNamedQuery("Persona.buscarPorCedula", Persona.class);
 		myQuery.setParameter("cedula", cedula);
 		return myQuery.getSingleResult();
 	}
@@ -133,10 +136,42 @@ public class PersonaJpaRepoImpl implements IPersonaJpaRepository {
 	@Override
 	public List<Persona> buscarPorNombreApellidoNamed(String nombre, String apellido) {
 		LOG.info("Busando por nombre y apellido -> NAMED QUERY");
-		TypedQuery<Persona> myQuery =this.em.createNamedQuery("Persona.buscarPorNombreApellido",Persona.class);
+		TypedQuery<Persona> myQuery = this.em.createNamedQuery("Persona.buscarPorNombreApellido", Persona.class);
 		myQuery.setParameter("nombre", nombre);
 		myQuery.setParameter("apellido", apellido);
 		return myQuery.getResultList();
+	}
+
+	@Override
+	public Persona buscarCedulaNative(String cedula) {
+		LOG.debug("Buscando por cedula --> NATIVE QUERY ");
+		Query myQ = this.em.createNativeQuery("SELECT * FROM persona WHERE pers_cedula=:cedula", Persona.class);
+		myQ.setParameter("cedula", cedula);
+		return (Persona) myQ.getSingleResult();
+	}
+
+	@Override
+	public Persona buscarCedulaNamedNative(String cedula) {
+		LOG.debug("Buscando por cedula NAMED NATIVE QUERY");
+		TypedQuery<Persona> myQ = this.em.createNamedQuery("Persona.buscarPorCedulaNative", Persona.class);
+		myQ.setParameter("cedula", cedula);
+		return myQ.getSingleResult();
+	}
+
+	@Override
+	public Persona buscarCedulaCriteria(String cedula) {
+		// TODO Auto-generated method stub
+		
+		LOG.debug("Buscando por cedula utilizando CRITERIA API");
+		CriteriaBuilder miCriteriaB = this.em.getCriteriaBuilder();
+		CriteriaQuery<Persona> miQuery = miCriteriaB.createQuery(Persona.class); // me retorna un Criteria Query de tipo persona
+																					
+        //Root FROM
+		Root<Persona> personaRoot= miQuery.from(Persona.class);
+		
+	    TypedQuery<Persona> queryFinal = this.em.createQuery(miQuery.select(personaRoot).where(miCriteriaB.equal(personaRoot.get("cedula"), cedula))); 	
+		
+		return queryFinal.getSingleResult();
 	}
 
 }

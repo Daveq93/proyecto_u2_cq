@@ -295,49 +295,43 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 //	this.estudianteService.insertar(e3);
 //	this.estudianteService.insertar(e4);
 
-		/*
-		 * Estudiante buscarPorCedulaTyped(String cedula);
-		 * 
-		 * List<Estudiante> buscarMenoresTyped(Integer edad);
-		 * 
-		 * List<Estudiante> buscarporSemestreNamed(String semestre);
-		 * 
-		 * List<Estudiante> buscarPorNombreApellidoNamed(String nombre, String
-		 * apellido);
-		 * 
-		 * List<Estudiante> buscarPorSemestreTypedNamed(String semestre);
-		 * 
-		 * List<Estudiante> buscarPorApellidoMenoresATypedNamed(String apellido,Integer
-		 * edad);
-		 */
-
-		LOG.info(this.estudianteService.buscarPorCedulaTyped("1980014499"));
-
-		List<Estudiante> lista1 = this.estudianteService.buscarMenoresTyped(20);
-		for (Estudiante estu : lista1) {
-			LOG.info(estu);
-		}
-
-		List<Estudiante> lista2 = this.estudianteService.buscarporSemestreNamed("Segundo");
-		for (Estudiante estu : lista2) {
-			LOG.info(estu);
-		}
 		
-		List<Estudiante> lista3 = this.estudianteService.buscarPorNombreApellidoNamed("maria","Vinueza" );
-		for (Estudiante estu : lista3) {
-			LOG.info(estu);
-		}
-		
-		List<Estudiante> lista4 = this.estudianteService.buscarPorSemestreTypedNamed("Tercero");
-		for (Estudiante estu : lista4) {
-			LOG.info(estu);
-		}
 
-		List<Estudiante> lista5 = this.estudianteService.buscarPorApellidoMenoresATypedNamed("Ruiz", 19);
-		for (Estudiante estu : lista5) {
-			LOG.info(estu);
-		}
+//		LOG.info(this.estudianteService.buscarPorCedulaTyped("1980014499"));
+//
+//		List<Estudiante> lista1 = this.estudianteService.buscarMenoresTyped(20);
+//		for (Estudiante estu : lista1) {
+//			LOG.info(estu);
+//		}
+//
+//		List<Estudiante> lista2 = this.estudianteService.buscarporSemestreNamed("Segundo");
+//		for (Estudiante estu : lista2) {
+//			LOG.info(estu);
+//		}
+//		
+//		List<Estudiante> lista3 = this.estudianteService.buscarPorNombreApellidoNamed("maria","Vinueza" );
+//		for (Estudiante estu : lista3) {
+//			LOG.info(estu);
+//		}
+//		
+//		List<Estudiante> lista4 = this.estudianteService.buscarPorSemestreTypedNamed("Tercero");
+//		for (Estudiante estu : lista4) {
+//			LOG.info(estu);
+//		}
+//
+//		List<Estudiante> lista5 = this.estudianteService.buscarPorApellidoMenoresATypedNamed("Ruiz", 19);
+//		for (Estudiante estu : lista5) {
+//			LOG.info(estu);
+//		}
 		
+		
+		System.out.println("------------- TALLER 21 -----------------");
+		
+		LOG.info(this.personaJpaService.buscarCedulaNative("1105161819"));
+		
+		LOG.info(this.personaJpaService.buscarCedulaNamedNative("1105161819"));
+		
+		LOG.info(this.personaJpaService.buscarCedulaCriteria("1105161819"));
 	}
 
 }

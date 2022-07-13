@@ -16,6 +16,10 @@ public interface IPersonaJpaRepository {
 	Persona buscarCedulaNamed(String cedula);
 
 	Persona buscarCedulaTypedNamed(String cedula);
+	Persona buscarCedulaNative(String cedula);
+	Persona buscarCedulaNamedNative(String cedula);
+	
+	Persona buscarCedulaCriteria(String cedula);
 
 	void eliminar(String cedula);
 
