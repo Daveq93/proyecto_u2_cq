@@ -21,6 +21,14 @@ public interface IEstudianteRepo {
 	List<Estudiante> buscarPorSemestreTypedNamed(String semestre);
 	
 	List<Estudiante> buscarPorApellidoMenoresATypedNamed(String apellido,Integer edad);
+	
+	List<Estudiante> buscarPorNombreGeneroNative(String nombre, String genero);
+	
+	List<Estudiante> buscarPorGeneroSemestreNative(String genero, String semestre);
+	
+	Estudiante buscarPorCedulaSemestreNamedNative(String cedula,String semestre);
+	
+	List<Estudiante> buscarPorGeneroEdadNamedNative(String genero, Integer edad);
 
 	void eliminar(String cedula);
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.uce.edu.repository.modelo.Estudiante;
 
-
 public interface IEstudianteService {
 	void insertar(Estudiante estudiante);
 
@@ -15,12 +14,20 @@ public interface IEstudianteService {
 	List<Estudiante> buscarMenoresTyped(Integer edad);
 
 	List<Estudiante> buscarporSemestreNamed(String semestre);
-	
+
 	List<Estudiante> buscarPorNombreApellidoNamed(String nombre, String apellido);
-	
+
 	List<Estudiante> buscarPorSemestreTypedNamed(String semestre);
-	
-	List<Estudiante> buscarPorApellidoMenoresATypedNamed(String apellido,Integer edad);
+
+	List<Estudiante> buscarPorApellidoMenoresATypedNamed(String apellido, Integer edad);
+
+	List<Estudiante> buscarPorNombreGeneroNative(String nombre, String genero);
+
+	List<Estudiante> buscarPorGeneroSemestreNative(String genero, String semestre);
+
+	Estudiante buscarPorCedulaSemestreNamedNative(String cedula, String semestre);
+
+	List<Estudiante> buscarPorGeneroEdadNamedNative(String genero, Integer edad);
 
 	void eliminar(String cedula);
 }

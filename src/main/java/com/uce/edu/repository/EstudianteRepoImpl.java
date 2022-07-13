@@ -95,6 +95,43 @@ public class EstudianteRepoImpl implements IEstudianteRepo {
 		myQ.executeUpdate();
 		
 	}
+
+	@Override
+	public List<Estudiante> buscarPorNombreGeneroNative(String nombre, String genero) {
+		LOG.debug("Buscando por nombre y genero NATIVE QUERY");
+		Query myQ =  this.em.createNativeQuery("SELECT * FROM estudiante WHERE estu_nombre=:nombre AND estu_genero=:genero",Estudiante.class);
+		myQ.setParameter("nombre",nombre );
+		myQ.setParameter("genero", genero);
+		return myQ.getResultList();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorGeneroSemestreNative(String genero, String semestre) {
+		LOG.debug("buscando por genero y semestre NATIVE QUERY");
+		Query myQ =  this.em.createNativeQuery("SELECT * FROM estudiante WHERE estu_genero=:genero AND estu_semestre=:semestre",Estudiante.class);
+		myQ.setParameter("genero",genero );
+		myQ.setParameter("semestre",semestre );
+		return myQ.getResultList();
+	}
+
+	@Override
+	public Estudiante buscarPorCedulaSemestreNamedNative(String cedula, String semestre) {
+		LOG.debug("Buscando por cedula y semestre NAMED NATIVE QUERY");
+		TypedQuery<Estudiante> myQ = this.em.createNamedQuery("Estudiante.buscarPorCedulaSemestre", Estudiante.class);
+		myQ.setParameter("cedula", cedula);
+		myQ.setParameter("semestre", semestre);
+		return myQ.getSingleResult();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorGeneroEdadNamedNative(String genero, Integer edad) {
+		// TODO Auto-generated method stub
+		LOG.debug("Buscando por genero y edad  NAMED NATIVE QUERY");
+		Query myQ = this.em.createNamedQuery("Estudiante.buscarPorGeneroEda",Estudiante.class);
+		myQ.setParameter("genero", genero);
+		myQ.setParameter("edad", edad);
+		return myQ.getResultList();
+	}
 	
 	
 

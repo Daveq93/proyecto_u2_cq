@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -17,6 +18,9 @@ import lombok.Data;
 @NamedQuery(name="Estudiante.buscarPorSemestre",query = "SELECT e FROM Estudiante e WHERE e.semestre =:semestre")
 @NamedQuery(name="Estudiante.buscarPorNombreApellido",query = "SELECT e FROM Estudiante e WHERE e.nombre=:nombre AND e.apellido =:apellido")
 @NamedQuery(name="Estudiante.buscarPorApellidoMenoresA",query="SELECT e FROM Estudiante e WHERE e.apellido=:apellido AND e.edad <=:edad") 
+
+@NamedNativeQuery(name="Estudiante.buscarPorCedulaSemestre",query = "SELECT * FROM estudiante WHERE estu_cedula=:cedula AND estu_semestre=:semestre",resultClass = Estudiante.class)
+@NamedNativeQuery(name="Estudiante.buscarPorGeneroEda",query = "SELECT * FROM estudiante WHERE estu_genero=:genero AND estu_edad<=:edad",resultClass = Estudiante.class)
 public class Estudiante {
 	
 	@Id
@@ -39,5 +43,8 @@ public class Estudiante {
 	
 	@Column(name="estu_semestre")
 	private String semestre;
+	
+	@Column(name="estu_genero")
+	private String genero;
 
 }

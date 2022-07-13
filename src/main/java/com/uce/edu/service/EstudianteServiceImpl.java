@@ -69,6 +69,30 @@ public class EstudianteServiceImpl implements IEstudianteService {
 		this.estuRepo.eliminar(cedula);
 	}
 
+	@Override
+	public List<Estudiante> buscarPorNombreGeneroNative(String nombre, String genero) {
+		// TODO Auto-generated method stub
+		return this.estuRepo.buscarPorNombreGeneroNative(nombre, genero);
+	}
+
+	@Override
+	public List<Estudiante> buscarPorGeneroSemestreNative(String genero, String semestre) {
+		// TODO Auto-generated method stub
+		return this.estuRepo.buscarPorGeneroSemestreNative(genero, semestre);
+	}
+
+	@Override
+	public Estudiante buscarPorCedulaSemestreNamedNative(String cedula, String semestre) {
+		// TODO Auto-generated method stub
+		return this.estuRepo.buscarPorCedulaSemestreNamedNative(cedula, semestre);
+	}
+
+	@Override
+	public List<Estudiante> buscarPorGeneroEdadNamedNative(String genero, Integer edad) {
+		// TODO Auto-generated method stub
+		return this.estuRepo.buscarPorGeneroEdadNamedNative(genero, edad);
+	}
+
 	
 
 }

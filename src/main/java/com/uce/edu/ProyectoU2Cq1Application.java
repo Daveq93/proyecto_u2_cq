@@ -295,8 +295,6 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 //	this.estudianteService.insertar(e3);
 //	this.estudianteService.insertar(e4);
 
-		
-
 //		LOG.info(this.estudianteService.buscarPorCedulaTyped("1980014499"));
 //
 //		List<Estudiante> lista1 = this.estudianteService.buscarMenoresTyped(20);
@@ -323,15 +321,26 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 //		for (Estudiante estu : lista5) {
 //			LOG.info(estu);
 //		}
-		
-		
+
 		System.out.println("------------- TALLER 21 -----------------");
+
+//		LOG.info(this.personaJpaService.buscarCedulaNative("1105161819"));
+//		
+//		LOG.info(this.personaJpaService.buscarCedulaNamedNative("1105161819"));
+//		
+//		LOG.info(this.personaJpaService.buscarCedulaCriteria("1105161819"));
+
+		System.out.println(" ---------------- TAREA 18 -----------------");
+
 		
-		LOG.info(this.personaJpaService.buscarCedulaNative("1105161819"));
+		this.estudianteService.buscarPorNombreGeneroNative("Karen", "F").forEach(System.out::println);
 		
-		LOG.info(this.personaJpaService.buscarCedulaNamedNative("1105161819"));
+		this.estudianteService.buscarPorGeneroSemestreNative("F", "Segundo").forEach(System.out::println);
 		
-		LOG.info(this.personaJpaService.buscarCedulaCriteria("1105161819"));
+		LOG.info(this.estudianteService.buscarPorCedulaSemestreNamedNative("1980032157", "Tercero"));
+		
+		this.estudianteService.buscarPorGeneroEdadNamedNative("M", 20).forEach(System.out::println);
+		
 	}
 
 }
