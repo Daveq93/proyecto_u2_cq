@@ -3,6 +3,8 @@ package com.uce.edu.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.uce.edu.repository.IPersonaJpaRepository;
@@ -114,6 +116,18 @@ public class PersonaJpaServiceImpl implements IPersonaJpaService {
 	public Persona buscarCedulaCriteria(String cedula) {
 		// TODO Auto-generated method stub
 		return this.personaRepo.buscarCedulaCriteria(cedula);
+	}
+
+	@Override
+	public Persona buscarDinamicamente(String nombre, String apellido, String genero) {
+		// TODO Auto-generated method stub
+		return this.personaRepo.buscarDinamicamente(nombre, apellido, genero);
+	}
+
+	@Override
+	public List<Persona> buscarDinamicamentePredicado(String nombre, String apellido, String genero) {
+		// TODO Auto-generated method stub
+		return this.personaRepo.buscarDinamicamentePredicado(nombre, apellido, genero);
 	}
 
 }

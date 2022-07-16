@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
@@ -161,17 +162,80 @@ public class PersonaJpaRepoImpl implements IPersonaJpaRepository {
 	@Override
 	public Persona buscarCedulaCriteria(String cedula) {
 		// TODO Auto-generated method stub
-		
-		LOG.debug("Buscando por cedula utilizando CRITERIA API");
-		CriteriaBuilder miCriteriaB = this.em.getCriteriaBuilder();
-		CriteriaQuery<Persona> miQuery = miCriteriaB.createQuery(Persona.class); // me retorna un Criteria Query de tipo persona
-																					
-        //Root FROM
-		Root<Persona> personaRoot= miQuery.from(Persona.class);
-		
-	    TypedQuery<Persona> queryFinal = this.em.createQuery(miQuery.select(personaRoot).where(miCriteriaB.equal(personaRoot.get("cedula"), cedula))); 	
-		
+
+		LOG.debug("Buscando por cedula utilizando CRITERIA API: " + cedula);
+
+		// creamos una instanvia de la interfaz CriteriaBuilder para construir el SQL
+		CriteriaBuilder miCriteriaB = this.em.getCriteriaBuilder(); // FROM Persona
+
+		// Especificamos el retorno de mi SQL
+		CriteriaQuery<Persona> miQuery = miCriteriaB.createQuery(Persona.class); // me retorna un Criteria Query de tipo
+																					// persona
+
+		// Aqui empezamos a construir el SQL
+		// Root FROM
+		// root porque estoy haciendo referencia a la tabla principal
+		Root<Persona> personaRoot = miQuery.from(Persona.class);
+
+		// lAs condiciones WHERE en criteria API se los conoce como predicados
+		TypedQuery<Persona> queryFinal = this.em
+				.createQuery(miQuery.select(personaRoot).where(miCriteriaB.equal(personaRoot.get("cedula"), cedula)));
+
 		return queryFinal.getSingleResult();
+	}
+
+	@Override
+	public Persona buscarDinamicamente(String nombre, String apellido, String genero) {
+		CriteriaBuilder myCriteriaBuilder = this.em.getCriteriaBuilder();
+		CriteriaQuery<Persona> myQuery = myCriteriaBuilder.createQuery(Persona.class);
+
+		Root<Persona> myTable = myQuery.from(Persona.class);
+
+		Predicate predicadoNombre = myCriteriaBuilder.equal(myTable.get("nombre"), nombre);
+		Predicate predicadoApellido = myCriteriaBuilder.equal(myTable.get("apellido"), apellido);
+
+		Predicate miPredicadoFinal = null;
+
+		if (genero.equals("M")) {
+			// si existen mas condiciones, podemos poner mas predicados
+			miPredicadoFinal = myCriteriaBuilder.and(predicadoNombre, predicadoApellido);
+		} else if (genero.equals("F")) {
+
+			miPredicadoFinal = myCriteriaBuilder.or(predicadoNombre, predicadoApellido);
+		}
+
+		TypedQuery<Persona> queryFinal = this.em.createQuery(myQuery.select(myTable).where(miPredicadoFinal));
+
+		return queryFinal.getSingleResult();
+	}
+
+	@Override
+	public  List<Persona> buscarDinamicamentePredicado(String nombre, String apellido, String genero) {
+		CriteriaBuilder myCriteriaBuilder = this.em.getCriteriaBuilder();
+		CriteriaQuery<Persona> myQuery = myCriteriaBuilder.createQuery(Persona.class);
+
+		Root<Persona> myTable = myQuery.from(Persona.class);
+
+		Predicate predicadoNombre = myCriteriaBuilder.equal(myTable.get("nombre"), nombre);
+		Predicate predicadoApellido = myCriteriaBuilder.equal(myTable.get("apellido"), apellido);
+		Predicate predicadoGenero = myCriteriaBuilder.equal(myTable.get("genero"), genero);
+
+		Predicate miPredicadoFinal = null;
+
+		if (genero.equals("M")) {
+			// si existen mas condiciones, podemos poner mas predicados
+			miPredicadoFinal = myCriteriaBuilder.or(predicadoNombre, predicadoApellido);
+
+			miPredicadoFinal = myCriteriaBuilder.and(miPredicadoFinal, predicadoGenero);
+		} else if (genero.equals("F")) {
+
+			miPredicadoFinal = myCriteriaBuilder.and(predicadoNombre, predicadoApellido);
+			miPredicadoFinal = myCriteriaBuilder.or(miPredicadoFinal, predicadoGenero);
+		}
+
+		TypedQuery<Persona> queryFinal = this.em.createQuery(myQuery.select(myTable).where(miPredicadoFinal));
+
+		return queryFinal.getResultList();
 	}
 
 }

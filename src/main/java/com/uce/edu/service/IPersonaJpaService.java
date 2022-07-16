@@ -40,4 +40,8 @@ public interface IPersonaJpaService {
 	public Integer eliminarPorGenero(String genero);
 	
 	List<Persona> buscarPorNombreApellidoNamed(String nombre, String apellido);
+
+	Persona buscarDinamicamente(String nombre, String apellido, String genero);
+	
+	List<Persona> buscarDinamicamentePredicado(String nombre,String apellido, String genero);
 }

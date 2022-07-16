@@ -333,13 +333,28 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		System.out.println(" ---------------- TAREA 18 -----------------");
 
 		
-		this.estudianteService.buscarPorNombreGeneroNative("Karen", "F").forEach(System.out::println);
+		//this.estudianteService.buscarPorNombreGeneroNative("Karen", "F").forEach(System.out::println);
 		
-		this.estudianteService.buscarPorGeneroSemestreNative("F", "Segundo").forEach(System.out::println);
+		//this.estudianteService.buscarPorGeneroSemestreNative("F", "Segundo").forEach(System.out::println);
 		
-		LOG.info(this.estudianteService.buscarPorCedulaSemestreNamedNative("1980032157", "Tercero"));
+	//	LOG.info(this.estudianteService.buscarPorCedulaSemestreNamedNative("1980032157", "Tercero"));
 		
-		this.estudianteService.buscarPorGeneroEdadNamedNative("M", 20).forEach(System.out::println);
+		//this.estudianteService.buscarPorGeneroEdadNamedNative("M", 20).forEach(System.out::println);
+		
+		
+		//Taller 22
+		
+		System.out.println("--------------  TALLER 22 --------------------");
+		LOG.info(this.personaJpaService.buscarDinamicamente("Juan", "Robles", "M"));
+	
+		LOG.info(this.personaJpaService.buscarDinamicamente("Andrea", "Yanes", "F"));
+		
+		List<Persona> listaPersonas = this.personaJpaService.buscarDinamicamentePredicado("Andrea", "Moran", "F");
+		
+		for (Persona persona : listaPersonas) {
+			LOG.info(persona);
+		}
+		
 		
 	}
 

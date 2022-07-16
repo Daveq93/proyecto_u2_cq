@@ -16,9 +16,11 @@ public interface IPersonaJpaRepository {
 	Persona buscarCedulaNamed(String cedula);
 
 	Persona buscarCedulaTypedNamed(String cedula);
+
 	Persona buscarCedulaNative(String cedula);
+
 	Persona buscarCedulaNamedNative(String cedula);
-	
+
 	Persona buscarCedulaCriteria(String cedula);
 
 	void eliminar(String cedula);
@@ -33,12 +35,14 @@ public interface IPersonaJpaRepository {
 
 	List<Persona> buscarPorNombre(String nombre);
 
-	 Integer actualizarPorApellido(String genero, String apellido);
+	Integer actualizarPorApellido(String genero, String apellido);
 
-	 Integer eliminarPorGenero(String genero);
-	 
-	 List<Persona> buscarPorNombreApellidoNamed(String nombre, String apellido);
+	Integer eliminarPorGenero(String genero);
 
+	List<Persona> buscarPorNombreApellidoNamed(String nombre, String apellido);
 
+	Persona buscarDinamicamente(String nombre, String apellido, String genero);
+
+	List<Persona> buscarDinamicamentePredicado(String nombre, String apellido, String genero);
 
 }
