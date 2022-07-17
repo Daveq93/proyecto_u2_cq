@@ -29,6 +29,10 @@ public interface IEstudianteRepo {
 	Estudiante buscarPorCedulaSemestreNamedNative(String cedula,String semestre);
 	
 	List<Estudiante> buscarPorGeneroEdadNamedNative(String genero, Integer edad);
+	
+	Estudiante buscarPorCedulaSemestreDinamicamente(String cedula,String semestre);
+	
+	List<Estudiante> busarPorNombreApellidoEdadDicamico(String nombre,String apellido,Integer edad);
 
 	void eliminar(String cedula);
 }

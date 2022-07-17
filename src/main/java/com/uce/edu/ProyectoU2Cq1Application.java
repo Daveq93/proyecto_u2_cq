@@ -345,16 +345,25 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		//Taller 22
 		
 		System.out.println("--------------  TALLER 22 --------------------");
-		LOG.info(this.personaJpaService.buscarDinamicamente("Juan", "Robles", "M"));
-	
-		LOG.info(this.personaJpaService.buscarDinamicamente("Andrea", "Yanes", "F"));
+//		LOG.info(this.personaJpaService.buscarDinamicamente("Juan", "Robles", "M"));
+//	
+//		LOG.info(this.personaJpaService.buscarDinamicamente("Andrea", "Yanes", "F"));
+//		
+//		List<Persona> listaPersonas = this.personaJpaService.buscarDinamicamentePredicado("Andrea", "Moran", "F");
+//		
+//		for (Persona persona : listaPersonas) {
+//			LOG.info(persona);
+//		}
 		
-		List<Persona> listaPersonas = this.personaJpaService.buscarDinamicamentePredicado("Andrea", "Moran", "F");
+		System.out.println("-----------------  TAREA 19  ----------------------");
 		
-		for (Persona persona : listaPersonas) {
-			LOG.info(persona);
+		
+		LOG.info(this.estudianteService.buscarPorCedulaSemestreDinamicamente("1215489870", "Segundo"));
+		
+		List<Estudiante> listaEstus = this.estudianteService.busarPorNombreApellidoEdadDicamico("Karen", "Ruiz", 23);
+		for (Estudiante estudiante : listaEstus) {
+			LOG.info(estudiante);
 		}
-		
 		
 	}
 

@@ -93,6 +93,18 @@ public class EstudianteServiceImpl implements IEstudianteService {
 		return this.estuRepo.buscarPorGeneroEdadNamedNative(genero, edad);
 	}
 
+	@Override
+	public Estudiante buscarPorCedulaSemestreDinamicamente(String cedula, String semestre) {
+		// TODO Auto-generated method stub
+		return this.estuRepo.buscarPorCedulaSemestreDinamicamente(cedula, semestre);
+	}
+
+	@Override
+	public List<Estudiante> busarPorNombreApellidoEdadDicamico(String nombre, String apellido, Integer edad) {
+		// TODO Auto-generated method stub
+		return this.estuRepo.busarPorNombreApellidoEdadDicamico(nombre, apellido, edad);
+	}
+
 	
 
 }
