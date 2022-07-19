@@ -18,6 +18,7 @@ import com.uce.edu.prueba.service.IPropietarioService;
 import com.uce.edu.prueba.service.IVehiculoService;
 import com.uce.edu.repository.modelo.Estudiante;
 import com.uce.edu.repository.modelo.Persona;
+import com.uce.edu.repository.modelo.PersonaDTO;
 import com.uce.edu.service.IEstudianteService;
 import com.uce.edu.service.IPersonaJdbcService;
 import com.uce.edu.service.IPersonaJpaService;
@@ -358,13 +359,24 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		System.out.println("-----------------  TAREA 19  ----------------------");
 		
 		
-		LOG.info(this.estudianteService.buscarPorCedulaSemestreDinamicamente("1215489870", "Segundo"));
+//		LOG.info(this.estudianteService.buscarPorCedulaSemestreDinamicamente("1215489870", "Segundo"));
+//		
+//		List<Estudiante> listaEstus = this.estudianteService.busarPorNombreApellidoEdadDicamico("Karen", "Ruiz", 23);
+//		for (Estudiante estudiante : listaEstus) {
+//			LOG.info(estudiante);
+//		}
 		
-		List<Estudiante> listaEstus = this.estudianteService.busarPorNombreApellidoEdadDicamico("Karen", "Ruiz", 23);
-		for (Estudiante estudiante : listaEstus) {
-			LOG.info(estudiante);
-		}
+		System.out.println("------------------  TALLER 23  -------------------");
 		
+//		this.personaJpaService.busarTodos().forEach(System.out::println);
+		
+		List<PersonaDTO> listaPerDTO = this.personaJpaService.buscarPorApellidoSencillo("Robles");
+		
+		for (PersonaDTO personaDTO : listaPerDTO) {
+			LOG.info(personaDTO);
+		}	
+		
+		this.personaJpaService.contarPorGenero().forEach(System.out::println);
 	}
 
 }

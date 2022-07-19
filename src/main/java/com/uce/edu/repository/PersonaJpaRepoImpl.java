@@ -15,6 +15,8 @@ import javax.transaction.Transactional;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import com.uce.edu.repository.modelo.Persona;
+import com.uce.edu.repository.modelo.PersonaContadorGenero;
+import com.uce.edu.repository.modelo.PersonaDTO;
 
 @Repository
 @Transactional
@@ -236,6 +238,21 @@ public class PersonaJpaRepoImpl implements IPersonaJpaRepository {
 		TypedQuery<Persona> queryFinal = this.em.createQuery(myQuery.select(myTable).where(miPredicadoFinal));
 
 		return queryFinal.getResultList();
+	}
+
+	@Override
+	public List<PersonaDTO> buscarPorApellidoSencillo(String apellido) {
+		TypedQuery<PersonaDTO> myQuery = this.em.createQuery("SELECT NEW com.uce.edu.repository.modelo.PersonaDTO(p.nombre,p.apellido,p.cedula) FROM Persona p WHERE  p.apellido=:apellido",PersonaDTO.class);
+		myQuery.setParameter("apellido", apellido);
+		
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<PersonaContadorGenero> contarPorGenero() {
+		// TODO Auto-generated method stub
+		TypedQuery<PersonaContadorGenero> myQuery = this.em.createQuery("SELECT NEW com.uce.edu.repository.modelo.PersonaContadorGenero(p.genero,COUNT(p.genero)) FROM Persona p  GROUP BY p.genero" , PersonaContadorGenero.class);
+		return myQuery.getResultList();
 	}
 
 }
