@@ -3,6 +3,8 @@ package com.uce.edu.service;
 import java.util.List;
 
 import com.uce.edu.repository.modelo.Estudiante;
+import com.uce.edu.repository.modelo.EstudianteContarEntreEdad;
+import com.uce.edu.repository.modelo.EstudianteDTO;
 
 public interface IEstudianteService {
 	void insertar(Estudiante estudiante);
@@ -28,10 +30,14 @@ public interface IEstudianteService {
 	Estudiante buscarPorCedulaSemestreNamedNative(String cedula, String semestre);
 
 	List<Estudiante> buscarPorGeneroEdadNamedNative(String genero, Integer edad);
-	
-	Estudiante buscarPorCedulaSemestreDinamicamente(String cedula,String semestre);
-	
-	List<Estudiante> busarPorNombreApellidoEdadDicamico(String nombre,String apellido,Integer edad);
+
+	Estudiante buscarPorCedulaSemestreDinamicamente(String cedula, String semestre);
+
+	List<Estudiante> busarPorNombreApellidoEdadDicamico(String nombre, String apellido, Integer edad);
+
+	EstudianteDTO buscarPorCedulaDTO(String cedula);
+
+	List<EstudianteContarEntreEdad> contarEstudiantesEntreEdad(Integer edadInicial, Integer edadFinal);
 
 	void eliminar(String cedula);
 }

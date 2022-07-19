@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.uce.edu.repository.IEstudianteRepo;
 import com.uce.edu.repository.modelo.Estudiante;
+import com.uce.edu.repository.modelo.EstudianteContarEntreEdad;
+import com.uce.edu.repository.modelo.EstudianteDTO;
 import com.uce.edu.to.EstudianteTo;
 
 @Service
@@ -103,6 +105,18 @@ public class EstudianteServiceImpl implements IEstudianteService {
 	public List<Estudiante> busarPorNombreApellidoEdadDicamico(String nombre, String apellido, Integer edad) {
 		// TODO Auto-generated method stub
 		return this.estuRepo.busarPorNombreApellidoEdadDicamico(nombre, apellido, edad);
+	}
+
+	@Override
+	public EstudianteDTO buscarPorCedulaDTO(String cedula) {
+		// TODO Auto-generated method stub
+		return this.estuRepo.buscarPorCedulaDTO(cedula);
+	}
+
+	@Override
+	public List<EstudianteContarEntreEdad> contarEstudiantesEntreEdad(Integer edadInicial, Integer edadFinal) {
+		// TODO Auto-generated method stub
+		return this.estuRepo.contarEstudiantesEntreEdad(edadInicial, edadFinal);
 	}
 
 	

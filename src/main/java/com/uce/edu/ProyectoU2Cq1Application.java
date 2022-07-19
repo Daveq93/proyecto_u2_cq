@@ -17,6 +17,7 @@ import com.uce.edu.prueba.service.IGestorMatriculaService;
 import com.uce.edu.prueba.service.IPropietarioService;
 import com.uce.edu.prueba.service.IVehiculoService;
 import com.uce.edu.repository.modelo.Estudiante;
+import com.uce.edu.repository.modelo.EstudianteContarEntreEdad;
 import com.uce.edu.repository.modelo.Persona;
 import com.uce.edu.repository.modelo.PersonaDTO;
 import com.uce.edu.service.IEstudianteService;
@@ -370,13 +371,25 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		
 //		this.personaJpaService.busarTodos().forEach(System.out::println);
 		
-		List<PersonaDTO> listaPerDTO = this.personaJpaService.buscarPorApellidoSencillo("Robles");
+//		List<PersonaDTO> listaPerDTO = this.personaJpaService.buscarPorApellidoSencillo("Robles");
+//		
+//		for (PersonaDTO personaDTO : listaPerDTO) {
+//			LOG.info(personaDTO);
+//		}	
+//		
+//		this.personaJpaService.contarPorGenero().forEach(System.out::println);
 		
-		for (PersonaDTO personaDTO : listaPerDTO) {
-			LOG.info(personaDTO);
-		}	
 		
-		this.personaJpaService.contarPorGenero().forEach(System.out::println);
+		System.out.println("------------------  TAREA 20  -------------------");
+		
+		
+		
+		LOG.info(this.estudianteService.buscarPorCedulaDTO("1598612987"));
+		
+		List<EstudianteContarEntreEdad> listaEstuContar = this.estudianteService.contarEstudiantesEntreEdad(18, 25);
+		for (EstudianteContarEntreEdad estuItem : listaEstuContar) {
+			LOG.info(estuItem);
+		}
 	}
 
 }

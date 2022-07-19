@@ -16,6 +16,8 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.repository.modelo.Estudiante;
+import com.uce.edu.repository.modelo.EstudianteContarEntreEdad;
+import com.uce.edu.repository.modelo.EstudianteDTO;
 import com.uce.edu.repository.modelo.Persona;
 
 @Repository
@@ -173,6 +175,22 @@ public class EstudianteRepoImpl implements IEstudianteRepo {
 		TypedQuery<Estudiante> queryFinal = this.em.createQuery(myCriteriaQuery.select(myTable).where(predicadoFinal));
 
 		return queryFinal.getResultList();
+	}
+
+	@Override
+	public EstudianteDTO buscarPorCedulaDTO(String cedula) {
+		// TODO Auto-generated method stub
+		TypedQuery<EstudianteDTO> myQuery = this.em.createQuery("select new com.uce.edu.repository.modelo.EstudianteDTO(e.nombre,e.cedula,e.genero) from Estudiante e where e.cedula=:cedula ",EstudianteDTO.class);
+		myQuery.setParameter("cedula", cedula);
+		return myQuery.getSingleResult();
+	}
+
+	@Override
+	public List<EstudianteContarEntreEdad> contarEstudiantesEntreEdad(Integer edadInicial, Integer edadFinal) {
+		TypedQuery<EstudianteContarEntreEdad> myQuery = this.em.createQuery("SELECT NEW com.uce.edu.repository.modelo.EstudianteContarEntreEdad(e.nombre,e.semestre,e.cedula,e.edad) FROM Estudiante e where e.edad BETWEEN: edadIni AND :edadFin",EstudianteContarEntreEdad.class);
+			myQuery.setParameter("edadIni", edadInicial);
+			myQuery.setParameter("edadFin", edadFinal);
+		return myQuery.getResultList() ;
 	}
 
 }
