@@ -3,7 +3,6 @@ package com.uce.edu;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +15,11 @@ import com.uce.edu.prueba.modelo.Vehiculo;
 import com.uce.edu.prueba.service.IGestorMatriculaService;
 import com.uce.edu.prueba.service.IPropietarioService;
 import com.uce.edu.prueba.service.IVehiculoService;
+import com.uce.edu.repository.modelo.Ciudadano;
+import com.uce.edu.repository.modelo.Empleado;
 import com.uce.edu.repository.modelo.Estudiante;
-import com.uce.edu.repository.modelo.EstudianteContarEntreEdad;
 import com.uce.edu.repository.modelo.Persona;
-import com.uce.edu.repository.modelo.PersonaDTO;
+import com.uce.edu.service.ICiudadanoService;
 import com.uce.edu.service.IEstudianteService;
 import com.uce.edu.service.IPersonaJdbcService;
 import com.uce.edu.service.IPersonaJpaService;
@@ -48,6 +48,9 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 
 	@Autowired
 	private IVehiculoService vehiculoService;
+	
+	@Autowired
+	private ICiudadanoService ciudadanoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2Cq1Application.class, args);
@@ -384,12 +387,25 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 		
 		
 		
-		LOG.info(this.estudianteService.buscarPorCedulaDTO("1598612987"));
+//		LOG.info(this.estudianteService.buscarPorCedulaDTO("1598612987"));
+//		
+//		List<EstudianteContarEntreEdad> listaEstuContar = this.estudianteService.contarEstudiantesEntreEdad(18, 25);
+//		for (EstudianteContarEntreEdad estuItem : listaEstuContar) {
+//			LOG.info(estuItem);
+//		}
 		
-		List<EstudianteContarEntreEdad> listaEstuContar = this.estudianteService.contarEstudiantesEntreEdad(18, 25);
-		for (EstudianteContarEntreEdad estuItem : listaEstuContar) {
-			LOG.info(estuItem);
-		}
+		System.out.println("----------------  TALLER 24 ---------------------");	
+		Ciudadano c1 = new Ciudadano();
+		c1.setNombre("David");
+		c1.setApellido("Macas");
+		
+		Empleado empl1 = new Empleado();
+		empl1.setCodigoIESS("12545");
+		empl1.setSalario(new BigDecimal(500));
+		empl1.setCiudadano(c1);
+		
+		c1.setEmpleado(empl1);
+		this.ciudadanoService.insertarCiudadano(c1);
 	}
 
 }
