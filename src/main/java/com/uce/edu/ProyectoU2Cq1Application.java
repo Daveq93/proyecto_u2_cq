@@ -15,10 +15,11 @@ import com.uce.edu.prueba.modelo.Vehiculo;
 import com.uce.edu.prueba.service.IGestorMatriculaService;
 import com.uce.edu.prueba.service.IPropietarioService;
 import com.uce.edu.prueba.service.IVehiculoService;
-import com.uce.edu.repository.modelo.Ciudadano;
-import com.uce.edu.repository.modelo.Empleado;
+import com.uce.edu.repository.modelo.CiudadanoDeber;
 import com.uce.edu.repository.modelo.Estudiante;
+import com.uce.edu.repository.modelo.Pasaporte;
 import com.uce.edu.repository.modelo.Persona;
+import com.uce.edu.service.ICiudadanoDeberService;
 import com.uce.edu.service.ICiudadanoService;
 import com.uce.edu.service.IEstudianteService;
 import com.uce.edu.service.IPersonaJdbcService;
@@ -51,6 +52,10 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 	
 	@Autowired
 	private ICiudadanoService ciudadanoService;
+	
+	
+	@Autowired
+	private ICiudadanoDeberService ciudadanoDeberService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2Cq1Application.class, args);
@@ -395,17 +400,50 @@ public class ProyectoU2Cq1Application implements CommandLineRunner {
 //		}
 		
 		System.out.println("----------------  TALLER 24 ---------------------");	
-		Ciudadano c1 = new Ciudadano();
-		c1.setNombre("David");
-		c1.setApellido("Macas");
+//		Ciudadano c1 = new Ciudadano();
+//		c1.setNombre("David");
+//		c1.setApellido("Macas");
+//		
+//		Empleado empl1 = new Empleado();
+//		empl1.setCodigoIESS("12545");
+//		empl1.setSalario(new BigDecimal(500));
+//		empl1.setCiudadano(c1);
+//		
+//		c1.setEmpleado(empl1);
+//		this.ciudadanoService.insertarCiudadano(c1);
 		
-		Empleado empl1 = new Empleado();
-		empl1.setCodigoIESS("12545");
-		empl1.setSalario(new BigDecimal(500));
-		empl1.setCiudadano(c1);
+		System.out.println("------------------ TAREA 21  ------------------ ");
 		
-		c1.setEmpleado(empl1);
-		this.ciudadanoService.insertarCiudadano(c1);
+		CiudadanoDeber cD1 = new CiudadanoDeber();
+		cD1.setApellido("Suares");
+		cD1.setCedula("1789620145");
+		cD1.setFechaNacimiento(LocalDateTime.of(1990, Month.APRIL,15,0,0));
+		cD1.setNombre("Manuel");
+		
+		Pasaporte pasaporte1 = new Pasaporte();
+		pasaporte1.setCiudadano(cD1);
+		pasaporte1.setFechaCaducidad(LocalDateTime.of(2026, Month.APRIL,30,0,0));
+		pasaporte1.setFechaEmision(LocalDateTime.of(2022, Month.MARCH,30,0,0));
+		pasaporte1.setNumero("SGPORDD-1002548");
+		
+		cD1.setPasaporte(pasaporte1);
+		
+		//Insertar
+		this.ciudadanoDeberService.insertarCiudadano(cD1);
+		
+		//Actualizar
+		cD1.setApellido("Suares Actualizado");
+		cD1.setId(1);
+		this.ciudadanoDeberService.actualizarCiudadano(cD1);
+		
+		//Buscar
+		LOG.info(this.ciudadanoDeberService.buscarPorCedula("1789620145"));
+		
+		//Eliminar
+		this.ciudadanoDeberService.eliminarCiudadanoPorCedula("1789620145");
+		
+		
+		
 	}
 
 }
